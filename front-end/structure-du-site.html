@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<html class="writer-html5" lang="fr" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -30,10 +35,6 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
     <link rel="next" title="Elements de templates personnalisés" href="template-tags.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Zeste de Savoir
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Zeste de Savoir
           
 
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -86,6 +88,7 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides.html">Guides pas-à-pas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contribuer à Zeste de Savoir</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html"><em>Workflow</em> et détails pratiques</a></li>
@@ -95,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="arborescence-des-fichiers.html">Arborescence des dossiers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="elements-specifiques-au-site.html">Eléments spécifiques au site</a></li>
 <li class="toctree-l2"><a class="reference internal" href="helpers-js.html">Helpers Javascript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers-scss.html">Mixins SCSS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interface-utilisateur.html">Interface utilisateur</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Structure globale du site</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#l-en-tete">L’en-tête</a><ul>
@@ -130,6 +134,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -168,7 +173,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../front-end.html">Le <em>front-end</em></a> &raquo;</li>
         
@@ -196,15 +201,15 @@
 <p>Le site est composé de plusieurs grandes parties.</p>
 <p>Tous ces éléments sont dans le fichier <code class="docutils literal notranslate"><span class="pre">templates/base.html</span></code>. Pour les utiliser dans les gabarits, il suffit
 d’étendre <code class="docutils literal notranslate"><span class="pre">base.html</span></code>, avec cette ligne :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Quand il s’agit d’un contenu comme un tutoriel ou un article, il faut étendre <code class="docutils literal notranslate"><span class="pre">templates/base_content_page.html</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base_content_page.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base_content_page.html&quot;</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Il se peut aussi que les modules aient leur propre gabarit de base, auquel cas c’est ce dernier qu’il faut utiliser :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;module/base.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;module/base.html&quot;</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -263,18 +268,18 @@ d’étendre <code class="docutils literal notranslate"><span class="pre">base.h
 <div class="section" id="l-aide-a-la-navigation">
 <h4>L’aide à la navigation<a class="headerlink" href="#l-aide-a-la-navigation" title="Lien permanent vers ce titre">¶</a></h4>
 <p>Pour renseigner l’aide à la navigation, il faut utiliser le bloc <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">breadcrumb</span> <span class="pre">%}</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% block breadcrumb %}<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Le titre de ma page<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>{% endblock %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">breadcrumb</span> <span class="cp">%}</span><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Le titre de ma page<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Quand il s’agit d’un gabarit de base, comme <code class="docutils literal notranslate"><span class="pre">templates/module/base.html</span></code>, il faut utiliser
 <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">breadcrumb_base</span> <span class="pre">%}</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% block breadcrumb_base %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">breadcrumb_base</span> <span class="cp">%}</span>
     <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% url mon-module %}&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="nv">mon-module</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>
             Le titre de mon module
         <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -288,82 +293,82 @@ de plusieurs blocs différents.</p>
 <div class="section" id="du-contenu-accompagne-de-titre-et-sous-titre">
 <h3>Du contenu accompagné de titre et sous-titre<a class="headerlink" href="#du-contenu-accompagne-de-titre-et-sous-titre" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Il faut mettre le contenu entre <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content</span> <span class="pre">%}</span></code> et <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></code>, comme ceci :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
-{% block content %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
     <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
         Super contenu !
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Vous avez deux autres blocs, le premier pour le titre et le deuxième pour le sous-titre :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
-{% block headline %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">headline</span> <span class="cp">%}</span>
     Mon super titre !
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 
-{% block headline_sub %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">headline_sub</span> <span class="cp">%}</span>
     Avec mon tout aussi superbe sous-titre...
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 
-{% block content %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
     <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
         Toujours avec mon super contenu !
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="du-contenu-sans-titre-ni-sous-titre">
 <h3>Du contenu sans titre ni sous-titre<a class="headerlink" href="#du-contenu-sans-titre-ni-sous-titre" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Dans ce cas là, il faut simplement utiliser <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content_out</span> <span class="pre">%}</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
-{% block content_out %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content_out</span> <span class="cp">%}</span>
     <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
         Super contenu sans titre ni sous-titre !
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="du-contenu-comme-un-tutoriel-ou-un-article">
 <h3>Du contenu comme un tutoriel ou un article<a class="headerlink" href="#du-contenu-comme-un-tutoriel-ou-un-article" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Dans ce cas là, il faut utiliser <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content</span> <span class="pre">%}</span></code> mais avec <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">&quot;base_content_page.html&quot;</span> <span class="pre">%}</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base_content_page.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base_content_page.html&quot;</span> <span class="cp">%}</span>
 
-{% block headline %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">headline</span> <span class="cp">%}</span>
     C&#39;est un article !
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 
-{% block headline_sub %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">headline_sub</span> <span class="cp">%}</span>
     A moins que ce soit un tutoriel...
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 
-{% block content %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
     <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
         Bref, il y a encore et encore du contenu !
     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Il peut arriver de devoir afficher d’autres types de contenus, comme des commentaires, en bas de la page. Dans ce
 cas là, on peut utiliser <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content_after</span> <span class="pre">%}</span></code> en plus :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base_content_page.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base_content_page.html&quot;</span> <span class="cp">%}</span>
 
-{% block content %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
     <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
         Bref, il y a encore, encore et encore du contenu !
     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 
-{% block content_after %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content_after</span> <span class="cp">%}</span>
     <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
         Et là, paf, un autre type de contenu.
     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Il existe une alternative à <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content_after</span> <span class="pre">%}</span></code> qui s’utilise de la même manière : <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content_ext</span> <span class="pre">%}</span></code>.
@@ -378,29 +383,29 @@ La différence est minime, pour plus d’informations, regardez le fichier <code
 <p class="caption"><span class="caption-text">Barre latérale de la page d’un profil</span><a class="headerlink" href="#id2" title="Lien permanent vers cette image">¶</a></p>
 </div>
 <p>Pour la barre latérale, il faut étendre <code class="docutils literal notranslate"><span class="pre">templates/base.html</span></code> et utiliser <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">sidebar</span> <span class="pre">%}</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
-{% block sidebar %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">sidebar</span> <span class="cp">%}</span>
     Ma superbe barre latérale !
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <div class="section" id="pour-les-pages-comme-un-tutoriel-ou-un-article">
 <h3>Pour les pages comme un tutoriel ou un article<a class="headerlink" href="#pour-les-pages-comme-un-tutoriel-ou-un-article" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Il faut étendre <code class="docutils literal notranslate"><span class="pre">templates/base_content_page.html</span></code> et utiliser <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">sidebar_actions</span> <span class="pre">%}</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;base_content_page.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base_content_page.html&quot;</span> <span class="cp">%}</span>
 
-{% block sidebar_actions %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">sidebar_actions</span> <span class="cp">%}</span>
     La superbe barre latérale des articles ou tutoriels !
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Tout comme les modules peuvent avoir leur propre gabarit de base, il peuvent avoir leur propre bloc pour la barre latérale :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &quot;module/base.html&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;module/base.html&quot;</span> <span class="cp">%}</span>
 
-{% block nom_du_bloc %}
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">nom_du_bloc</span> <span class="cp">%}</span>
     La superbe barre latérale de mon module !
-{% endblock %}
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Pour trouver le nom de ce bloc, regardez <code class="docutils literal notranslate"><span class="pre">templates/module/base.html</span></code> !</p>
@@ -463,11 +468,19 @@ La différence est minime, pour plus d’informations, regardez le fichier <code
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2014-2020, Zeste de Savoir
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -478,7 +491,6 @@ La différence est minime, pour plus d’informations, regardez le fichier <code
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

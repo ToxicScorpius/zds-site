@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<html class="writer-html5" lang="fr" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -30,10 +35,6 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
     <link rel="next" title="API" href="../api.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Zeste de Savoir
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Zeste de Savoir
           
 
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -86,6 +88,7 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../guides.html">Guides pas-à-pas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contribuer à Zeste de Savoir</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html"><em>Workflow</em> et détails pratiques</a></li>
@@ -95,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="arborescence-des-fichiers.html">Arborescence des dossiers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="elements-specifiques-au-site.html">Eléments spécifiques au site</a></li>
 <li class="toctree-l2"><a class="reference internal" href="helpers-js.html">Helpers Javascript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers-scss.html">Mixins SCSS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interface-utilisateur.html">Interface utilisateur</a></li>
 <li class="toctree-l2"><a class="reference internal" href="structure-du-site.html">Structure globale du site</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Elements de templates personnalisés</a><ul>
@@ -163,6 +167,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -201,7 +206,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../front-end.html">Le <em>front-end</em></a> &raquo;</li>
         
@@ -234,12 +239,12 @@ Python.</p>
 <h2>append_query_params<a class="headerlink" href="#append-query-params" title="Lien permanent vers ce titre">¶</a></h2>
 <p>L’élément <code class="docutils literal notranslate"><span class="pre">append_query_params</span></code> permet de rajouter des paramètres à la requête <code class="docutils literal notranslate"><span class="pre">GET</span></code> courante. Par exemple, sur une page
 <code class="docutils literal notranslate"><span class="pre">module/toto</span></code>, le code de template suivant :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load append_query_params %}
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% append_query_params key1=var1,key2=var2 %}&quot;</span><span class="p">&gt;</span>Mon lien<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">append_query_params</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">append_query_params</span> <span class="nv">key1</span><span class="o">=</span><span class="nv">var1</span><span class="o">,</span><span class="nv">key2</span><span class="o">=</span><span class="nv">var2</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span>Mon lien<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 <p>produira le code suivant :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;module/toto?key1=1&amp;key2=2&quot;</span><span class="p">&gt;</span>Mon lien<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;module/toto?key1=1&amp;key2=2&quot;</span><span class="p">&gt;</span>Mon lien<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 <p>si le contenu de <code class="docutils literal notranslate"><span class="pre">var1</span></code> est <code class="docutils literal notranslate"><span class="pre">1</span></code> et le contenu de <code class="docutils literal notranslate"><span class="pre">var2</span></code> est <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
@@ -247,17 +252,17 @@ Python.</p>
 <div class="section" id="le-module-trail">
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">trail</span></code><a class="headerlink" href="#le-module-trail" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Ce module définit l’élément <code class="docutils literal notranslate"><span class="pre">trail</span></code> qui permet de retirer tous les sauts de ligne et les espaces dans le bloc de gabarit entre les balises HTML ainsi qu’à la fin et au début des lignes. Le code suivant :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load trail %}
-{% trail %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">trail</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">trail</span> <span class="cp">%}</span>
 <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>
     Hello        world!
     <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;example.com&quot;</span><span class="p">&gt;</span>   Un exemple<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
-{% endtrail %}
+<span class="cp">{%</span> <span class="k">endtrail</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Produira le code suivant :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span> Hello        world! <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;example.com&quot;</span><span class="p">&gt;</span>   Un exemple<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span> Hello        world! <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;example.com&quot;</span><span class="p">&gt;</span>   Un exemple<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -265,12 +270,12 @@ Python.</p>
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">captureas</span></code><a class="headerlink" href="#le-module-captureas" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Ce module définit l’élément <code class="docutils literal notranslate"><span class="pre">captureas</span></code>, qui permet de demander d’effectuer le rendu d’un bloc de gabarit et de stocker son contenu dans
 une variable. Ainsi le code suivant :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load captureas %}
-{% captureas var2 %}
-{% for i in &#39;xxxxxxxxxx&#39; %}
-{{forloop.counter0}}
-{% endfor %}
-{% endcaptureas %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">captureas</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">captureas</span> <span class="nv">var2</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">i</span> <span class="k">in</span> <span class="s1">&#39;xxxxxxxxxx&#39;</span> <span class="cp">%}</span>
+<span class="cp">{{</span><span class="nb">forloop</span><span class="nv">.counter0</span><span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endcaptureas</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>ne produit rien en sortie mais affecte le résultat du bloc entre les éléments <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">captureas</span> <span class="pre">var2</span> <span class="pre">%}</span></code> et
@@ -282,8 +287,8 @@ une variable. Ainsi le code suivant :</p>
 <div class="section" id="format-date">
 <h3><code class="docutils literal notranslate"><span class="pre">format_date</span></code><a class="headerlink" href="#format-date" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce filtre formate une date au format <code class="docutils literal notranslate"><span class="pre">DateTime</span></code> destiné à être affiché sur le site :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load date %}
-{{ date|format_date }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">date</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">date</span><span class="o">|</span><span class="nf">format_date</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 </div>
@@ -294,12 +299,12 @@ une variable. Ainsi le code suivant :</p>
 <div class="section" id="humane-time">
 <h3><code class="docutils literal notranslate"><span class="pre">humane_time</span></code><a class="headerlink" href="#humane-time" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Formate une date au format <em>Nombre de seconde depuis Epoch</em> en un élément lisible. Ainsi :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load date %}
-{{ date_epoch|humane_time }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">date</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">date_epoch</span><span class="o">|</span><span class="nf">humane_time</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 <p>sera rendu :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>jeudi 01 janvier 1970 à 00h00
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>jeudi 01 janvier 1970 à 00h00
 </pre></div>
 </div>
 <p>Si le contenu de <code class="docutils literal notranslate"><span class="pre">date_epoch</span></code> etait de <code class="docutils literal notranslate"><span class="pre">42</span></code>.</p>
@@ -317,8 +322,8 @@ Ce filtre transforme cette date en une date que les autres filtres de ce module 
 <div class="section" id="obfuscate">
 <h3><code class="docutils literal notranslate"><span class="pre">obfuscate</span></code><a class="headerlink" href="#obfuscate" title="Lien permanent vers ce titre">¶</a></h3>
 <p>L’adresse de courriel va être encodée avec des caractères ASCII pour la protéger des robots :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load email_obfuscator %}
-{{ &#39;your@email.com&#39;|obfuscate }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">email_obfuscator</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="s1">&#39;your@email.com&#39;</span><span class="o">|</span><span class="nf">obfuscate</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 </div>
@@ -326,12 +331,12 @@ Ce filtre transforme cette date en une date que les autres filtres de ce module 
 <h3><code class="docutils literal notranslate"><span class="pre">obfuscate_mailto</span></code><a class="headerlink" href="#obfuscate-mailto" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce <em>templatetag</em> ajoute en plus un <code class="docutils literal notranslate"><span class="pre">mailto</span></code>. Il prend un paramètre optionnel qui permet d’avoir un texte personnalisé dans
 la balise <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load email_obfuscator %}
-{{ &#39;your@email.com&#39;|obfuscate_mailto:&quot;my custom text&quot; }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">email_obfuscator</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="s1">&#39;your@email.com&#39;</span><span class="o">|</span><span class="nf">obfuscate_mailto</span><span class="s2">:&quot;my custom text&quot;</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 <p>Ce qui donnera :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#121;&amp;#111;&amp;#117;&amp;#114;&amp;#64;&amp;#101;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&quot;</span><span class="p">&gt;</span>my custom text<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#121;&amp;#111;&amp;#117;&amp;#114;&amp;#64;&amp;#101;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&quot;</span><span class="p">&gt;</span>my custom text<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -341,12 +346,12 @@ la balise <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;
 pouvant être inséré entre les balises <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> et <code class="docutils literal notranslate"><span class="pre">&lt;/a&gt;</span></code>) ainsi que <code class="docutils literal notranslate"><span class="pre">target=&quot;_top&quot;</span></code>.</p>
 <p>Il est utilisé sur la page « Contact ».</p>
 <p>Exemple :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load email_obfuscator %}
-{{ &#39;association@zestedesavoir.com&#39;|obfuscate_mailto_top_subject:&quot;Contact communication&quot; }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">email_obfuscator</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="s1">&#39;association@zestedesavoir.com&#39;</span><span class="o">|</span><span class="nf">obfuscate_mailto_top_subject</span><span class="s2">:&quot;Contact communication&quot;</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 <p>Ce qui sera rendu de la manière suivante:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#97;&amp;#115;&amp;#115;&amp;#111;&amp;#99;&amp;#105;&amp;#97;&amp;#116;&amp;#105;&amp;#111;&amp;#110;&amp;#64;&amp;#122;&amp;#101;&amp;#115;&amp;#116;&amp;#101;&amp;#100;&amp;#101;&amp;#115;&amp;#97;&amp;#118;&amp;#111;&amp;#105;&amp;#114;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&amp;#63;&amp;#83;&amp;#117;&amp;#98;&amp;#106;&amp;#101;&amp;#99;&amp;#116;&amp;#61;&amp;#67;&amp;#111;&amp;#110;&amp;#116;&amp;#97;&amp;#99;&amp;#116;&amp;#32;&amp;#99;&amp;#111;&amp;#109;&amp;#109;&amp;#117;&amp;#110;&amp;#105;&amp;#99;&amp;#97;&amp;#116;&amp;#105;&amp;#111;&amp;#110;&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_top&quot;</span><span class="p">&gt;</span><span class="ni">&amp;#97;&amp;#115;&amp;#115;&amp;#111;&amp;#99;&amp;#105;&amp;#97;&amp;#116;&amp;#105;&amp;#111;&amp;#110;&amp;#64;&amp;#122;&amp;#101;&amp;#115;&amp;#116;&amp;#101;&amp;#100;&amp;#101;&amp;#115;&amp;#97;&amp;#118;&amp;#111;&amp;#105;&amp;#114;&amp;#46;&amp;#99;&amp;#111;&amp;#109;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#97;&amp;#115;&amp;#115;&amp;#111;&amp;#99;&amp;#105;&amp;#97;&amp;#116;&amp;#105;&amp;#111;&amp;#110;&amp;#64;&amp;#122;&amp;#101;&amp;#115;&amp;#116;&amp;#101;&amp;#100;&amp;#101;&amp;#115;&amp;#97;&amp;#118;&amp;#111;&amp;#105;&amp;#114;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&amp;#63;&amp;#83;&amp;#117;&amp;#98;&amp;#106;&amp;#101;&amp;#99;&amp;#116;&amp;#61;&amp;#67;&amp;#111;&amp;#110;&amp;#116;&amp;#97;&amp;#99;&amp;#116;&amp;#32;&amp;#99;&amp;#111;&amp;#109;&amp;#109;&amp;#117;&amp;#110;&amp;#105;&amp;#99;&amp;#97;&amp;#116;&amp;#105;&amp;#111;&amp;#110;&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_top&quot;</span><span class="p">&gt;</span><span class="ni">&amp;#97;&amp;#115;&amp;#115;&amp;#111;&amp;#99;&amp;#105;&amp;#97;&amp;#116;&amp;#105;&amp;#111;&amp;#110;&amp;#64;&amp;#122;&amp;#101;&amp;#115;&amp;#116;&amp;#101;&amp;#100;&amp;#101;&amp;#115;&amp;#97;&amp;#118;&amp;#111;&amp;#105;&amp;#114;&amp;#46;&amp;#99;&amp;#111;&amp;#109;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 <p>On conviendra du fait que c’est parfaitement illisible ;)</p>
@@ -378,9 +383,9 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="le-module-htmldiff">
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">htmldiff</span></code><a class="headerlink" href="#le-module-htmldiff" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Ce module définit le tag <code class="docutils literal notranslate"><span class="pre">htmldiff</span></code> qui affiche la différence entre deux chaînes de caractères, en utilisant <a class="reference external" href="https://docs.python.org/2/library/difflib.html">difflib (en)</a>. Le code généré est un tableau HTML à l’intérieur d’une div. Il est employé pour afficher le <em>diff</em> des tutoriels et des articles.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load htmldiff %}
-{% htmldiff &quot;Hello world!&quot; &quot;Hello world!!!&quot; %}
-{% htmldiff &quot;Hello Pierre!&quot; &quot;Hello Peter!&quot; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">htmldiff</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">htmldiff</span> <span class="s2">&quot;Hello world!&quot;</span> <span class="s2">&quot;Hello world!!!&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">htmldiff</span> <span class="s2">&quot;Hello Pierre!&quot;</span> <span class="s2">&quot;Hello Peter!&quot;</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -390,16 +395,16 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="is-read">
 <h3><code class="docutils literal notranslate"><span class="pre">is_read</span></code><a class="headerlink" href="#is-read" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Employé sur un <em>topic</em>, renvoit si l’utilisateur courant a lu ou non le topic considéré. Par exemple, le code suivant mettra la classe « unread » si le <em>topic</em> n’as pas été lu par l’utilisateur :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;{% if not topic|is_read %}unread{% endif %}&quot;</span><span class="p">&gt;</span>{{ topic.title}}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nv">topic</span><span class="o">|</span><span class="nf">is_read</span> <span class="cp">%}</span><span class="s">unread</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">topic.title</span><span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="humane-delta">
 <h3><code class="docutils literal notranslate"><span class="pre">humane_delta</span></code><a class="headerlink" href="#humane-delta" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce filtre renvoit le texte correspondant à une période donnée, si utilisé comme suis :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-{{ period|humane_delta }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">period</span><span class="o">|</span><span class="nf">humane_delta</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 <p>En fonction de la valeur de <code class="docutils literal notranslate"><span class="pre">period</span></code>, les chaines de caractères suivantes seront renvoyées :</p>
@@ -414,12 +419,12 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="followed-topics">
 <h3><code class="docutils literal notranslate"><span class="pre">followed_topics</span></code><a class="headerlink" href="#followed-topics" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce filtre renvoit la liste des <em>topics</em> suivis par l’utilisateur, sous la forme d’un dictionaire :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-{% with followedtopics=user|followed_topics %}
-    {% for period, topics in followedtopics.items %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">followedtopics</span><span class="o">=</span><span class="nv">user</span><span class="o">|</span><span class="nf">followed_topics</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">period</span><span class="o">,</span> <span class="nv">topics</span> <span class="k">in</span> <span class="nv">followedtopics.items</span> <span class="cp">%}</span>
     ...
-    {% endfor %}
-{% endwith %}
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>où <code class="docutils literal notranslate"><span class="pre">period</span></code> est un nombre au format attendu par <code class="docutils literal notranslate"><span class="pre">humane_delta</span></code> (entre 1 et 5, voir plus haut) et <code class="docutils literal notranslate"><span class="pre">topics</span></code> la liste des <em>topics</em> dont le dernier message est situé dans cette période de temps. Les <em>topics</em> sont des objets <code class="docutils literal notranslate"><span class="pre">Topic</span></code> (<a class="reference external" href="../back-end-code/forum.html#zds.forum.models.Topic">voir le détail de son implémentation ici</a>).</p>
@@ -427,12 +432,12 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="interventions-topics">
 <h3><code class="docutils literal notranslate"><span class="pre">interventions_topics</span></code><a class="headerlink" href="#interventions-topics" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce filtre récupère la liste des notifications non lues sur des modèles notifiables excluant les messages privés:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-{% with unread_posts=user|interventions_topics %}
-    {% for unread in unread_posts %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">unread_posts</span><span class="o">=</span><span class="nv">user</span><span class="o">|</span><span class="nf">interventions_topics</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">unread</span> <span class="k">in</span> <span class="nv">unread_posts</span> <span class="cp">%}</span>
     ...
-    {% endfor %}
-{% endwith %}
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Dans ce cas, la variable <code class="docutils literal notranslate"><span class="pre">unread</span></code> est un dictionnaire contentant 4 champs:</p>
@@ -446,12 +451,12 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="interventions-privatetopics">
 <h3><code class="docutils literal notranslate"><span class="pre">interventions_privatetopics</span></code><a class="headerlink" href="#interventions-privatetopics" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce filtre récupère la liste des MPs non-lus :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-{% with unread_posts=user|interventions_privatetopics %}
-    {% for unread in unread_posts %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">unread_posts</span><span class="o">=</span><span class="nv">user</span><span class="o">|</span><span class="nf">interventions_privatetopics</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">unread</span> <span class="k">in</span> <span class="nv">unread_posts</span> <span class="cp">%}</span>
     ...
-    {% endfor %}
-{% endwith %}
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Dans ce cas, <code class="docutils literal notranslate"><span class="pre">topic</span></code> est un objet de type <code class="docutils literal notranslate"><span class="pre">PrivateTopic</span></code> (<a class="reference external" href="../back-end-code/private-message.html#zds.mp.models.PrivateTopic">voir son implémentation ici</a>)</p>
@@ -459,12 +464,12 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="alerts-list">
 <h3><code class="docutils literal notranslate"><span class="pre">alerts_list</span></code><a class="headerlink" href="#alerts-list" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Récupère la liste des alertes (si l’utilisateur possède les droits pour le faire) :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-{% with alerts_list=user|alerts_list %}
-    {% for alert in alerts_list.alerts %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">alerts_list</span><span class="o">=</span><span class="nv">user</span><span class="o">|</span><span class="nf">alerts_list</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">alert</span> <span class="k">in</span> <span class="nv">alerts_list.alerts</span> <span class="cp">%}</span>
     ...
-    {% endfor %}
-{% endwith %}
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">alert_list</span></code> est un dictionnaire contenant 2 champs:</p>
@@ -483,10 +488,10 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="waiting-count">
 <h3><code class="docutils literal notranslate"><span class="pre">waiting_count</span></code><a class="headerlink" href="#waiting-count" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Récupère le nombre de tutoriels ou d’articles dans la zone de validation n’ayant pas été réservés par un validateur.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-{% with waiting_tutorials_count=&quot;TUTORIAL&quot;|waiting_count waiting_articles_count=&quot;ARTICLE&quot;|waiting_count %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">waiting_tutorials_count</span><span class="o">=</span><span class="s2">&quot;TUTORIAL&quot;</span><span class="o">|</span><span class="nf">waiting_count</span> <span class="nv">waiting_articles_count</span><span class="o">=</span><span class="s2">&quot;ARTICLE&quot;</span><span class="o">|</span><span class="nf">waiting_count</span> <span class="cp">%}</span>
     ...
-{% endwith %}
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Le filtre doit être appelé sur <code class="docutils literal notranslate"><span class="pre">&quot;TUTORIAL&quot;</span></code> pour récupérer le nombre de tutoriels en attente et sur <code class="docutils literal notranslate"><span class="pre">&quot;ARTICLE&quot;</span></code> pour le nombre d’articles.</p>
@@ -494,10 +499,10 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="id1">
 <h3><code class="docutils literal notranslate"><span class="pre">humane_delta</span></code><a class="headerlink" href="#id1" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Permet d’afficher une période en lettres. Fait le lien entre le label d’un jour et sa clé.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load interventions %}
-{% for period, topics in followedtopics.items %}
-   <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>{{ period|humane_delta }}<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-{% endfor %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">interventions</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">period</span><span class="o">,</span> <span class="nv">topics</span> <span class="k">in</span> <span class="nv">followedtopics.items</span> <span class="cp">%}</span>
+   <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">period</span><span class="o">|</span><span class="nf">humane_delta</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -508,10 +513,10 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <h3><code class="docutils literal notranslate"><span class="pre">user</span></code><a class="headerlink" href="#user" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Pour un objet de type <code class="docutils literal notranslate"><span class="pre">Profile</span></code> (<a class="reference external" href="../back-end-code/member.html#zds.member.models.Profile">voir son implémentation</a>), ce filtre récupère son objet <code class="docutils literal notranslate"><span class="pre">User</span></code> correspondant (<a class="reference external" href="https://docs.djangoproject.com/fr/1.8/topics/auth/default/#user-objects">voir les informations sur cet objet dans la documentation de Django</a>).</p>
 <p>Par exemple, le code suivant affichera le nom de l’utilisateur :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load profiles %}
-{% with user=profile|user %}
-    Je suis {{ user.username }}
-{% endwith %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">profiles</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">user</span><span class="o">=</span><span class="nv">profile</span><span class="o">|</span><span class="nf">user</span> <span class="cp">%}</span>
+    Je suis <span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -519,20 +524,20 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <h3><code class="docutils literal notranslate"><span class="pre">profile</span></code><a class="headerlink" href="#profile" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Fait l’opération inverse du filtre <code class="docutils literal notranslate"><span class="pre">user</span></code> : récupère un objet <code class="docutils literal notranslate"><span class="pre">Profile</span></code> à partir d’un objet <code class="docutils literal notranslate"><span class="pre">User</span></code>.</p>
 <p>Par exemple, le code suivant affichera un lien vers le profil de l’utilisateur :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load profiles %}
-{% with profile=user|profile %}
-    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ profile.get_absolute_url }}&quot;</span><span class="p">&gt;</span>{{ user.username }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-{% endwith %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">profiles</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">profile</span><span class="o">=</span><span class="nv">user</span><span class="o">|</span><span class="nf">profile</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">profile.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="state">
 <h3><code class="docutils literal notranslate"><span class="pre">state</span></code><a class="headerlink" href="#state" title="Lien permanent vers ce titre">¶</a></h3>
 <p>À partir d’un objet <code class="docutils literal notranslate"><span class="pre">User</span></code>, ce filtre récupère « l’état » de l’utilisateur. Par exemple, il peut être employé comme décris ci-dessous:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load profiles %}
-{% with user_state=user|state %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">profiles</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">with</span> <span class="nv">user_state</span><span class="o">=</span><span class="nv">user</span><span class="o">|</span><span class="nf">state</span> <span class="cp">%}</span>
 ...
-{% endwith %}
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>où <code class="docutils literal notranslate"><span class="pre">user_state</span></code> peut alors valoir une des 4 chaines de caractères suivantes, indiquant un état particulier, <strong>ou rien</strong> :</p>
@@ -548,8 +553,8 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="le-module-roman">
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">roman</span></code><a class="headerlink" href="#le-module-roman" title="Lien permanent vers ce titre">¶</a></h2>
 <p>définit le filtre <code class="docutils literal notranslate"><span class="pre">roman</span></code>, qui transforme un nombre entier en chiffre romain, utilisé pour l’affichage du sommaire des tutoriels. Par exemple, le code suivant :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load roman %}
-{{ 453|roman }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">roman</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="m">453</span><span class="o">|</span><span class="nf">roman</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 <p>affichera <code class="docutils literal notranslate"><span class="pre">CDLIII</span></code>, qui est bien la façon d’écrire 453 en chiffres romain.</p>
@@ -558,8 +563,8 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">set</span></code><a class="headerlink" href="#le-module-set" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Ce module définit l’élément <code class="docutils literal notranslate"><span class="pre">set</span></code>, permetant de définir de nouvelles variables, il est donc complémentaire au module <code class="docutils literal notranslate"><span class="pre">captureas</span></code>.</p>
 <p>Le code suivant permet de définir la variable <code class="docutils literal notranslate"><span class="pre">var</span></code> comme valant <code class="docutils literal notranslate"><span class="pre">True</span></code> :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load set %}
-{% set True as var %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">set</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="kp">True</span> <span class="k">as</span> <span class="nv">var</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>Bien entendu, il est possible d’assigner à une variable la valeur d’une autre. Soit la variable <code class="docutils literal notranslate"><span class="pre">var</span></code>, définie de la manière suivante dans le code Python :</p>
@@ -569,9 +574,9 @@ génération des fichiers PDF et EPUB des tutos :</p>
 </pre></div>
 </div>
 <p>Si on écrit le code suivant dans le gabarit :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load set %}
-{% set var.value as value %}
-{{ value }}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">set</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">var.value</span> <span class="k">as</span> <span class="nv">value</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">value</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 <p>alors celle-ci affichera bien <code class="docutils literal notranslate"><span class="pre">test</span></code>.</p>
@@ -586,14 +591,14 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <div class="section" id="topbar-forum-categories">
 <h3><code class="docutils literal notranslate"><span class="pre">topbar_forum_categories</span></code><a class="headerlink" href="#topbar-forum-categories" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce filtre récupère les forums, classés par catégorie.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% with top=user|topbar_forum_categories %}
-    {% for title, forums in top.categories.items %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">with</span> <span class="nv">top</span><span class="o">=</span><span class="nv">user</span><span class="o">|</span><span class="nf">topbar_forum_categories</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">title</span><span class="o">,</span> <span class="nv">forums</span> <span class="k">in</span> <span class="nv">top.categories.items</span> <span class="cp">%}</span>
     ...
-    {% endfor %}
-    {% for tag in top.tags %}
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">tag</span> <span class="k">in</span> <span class="nv">top.tags</span> <span class="cp">%}</span>
     ...
-    {% endfor %}
-{% endwith %}
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>où,</p>
@@ -606,11 +611,11 @@ génération des fichiers PDF et EPUB des tutos :</p>
 <h3><code class="docutils literal notranslate"><span class="pre">topbar_publication_categories</span></code><a class="headerlink" href="#topbar-publication-categories" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce filtres renvoit une liste des catégories utilisées dans les articles/tutoriels publiés.</p>
 <p>Par exemple, pour les tutoriels, on retrouvera le code suivant:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% with categories=&quot;TUTORIAL&quot;|topbar_publication_categories %}
-    {% for title, subcats in categories.items %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">with</span> <span class="nv">categories</span><span class="o">=</span><span class="s2">&quot;TUTORIAL&quot;</span><span class="o">|</span><span class="nf">topbar_publication_categories</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">title</span><span class="o">,</span> <span class="nv">subcats</span> <span class="k">in</span> <span class="nv">categories.items</span> <span class="cp">%}</span>
         ...
-    {% endfor %}
-{% endwith %}
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <p>où <code class="docutils literal notranslate"><span class="pre">categories</span></code> est un dictionnaire contenant le nom de la catégorie (ici <code class="docutils literal notranslate"><span class="pre">title</span></code>) et une liste des sous-catégories correspondantes (ici <code class="docutils literal notranslate"><span class="pre">subcats</span></code>), c’est-à-dire un <em>tuple</em> de la forme <code class="docutils literal notranslate"><span class="pre">titre,</span> <span class="pre">slug</span></code></p>
@@ -623,8 +628,8 @@ ce templatetag est utile dans le cas de la hiérarchie des tutoriels où vous po
 <p>Ce templatetag est basé sur deux dictionnaires de mots : le premier qui associe le déterminant masculin à son homologue
 féminin est le second qui associe un mot à un booléen qui indique s’il est féminin <code class="docutils literal notranslate"><span class="pre">True</span></code> ou masculin <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <p>Exemple :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load feminize %}
-{{ &quot;le&quot;|feminize:&quot;partie&quot; }} partie <span class="c">&lt;!-- affiche &quot;la partie&quot; si vous êtes en langue française --&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">feminize</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="s2">&quot;le&quot;</span><span class="o">|</span><span class="nf">feminize</span><span class="s2">:&quot;partie&quot;</span> <span class="cp">}}</span> partie <span class="c">&lt;!-- affiche &quot;la partie&quot; si vous êtes en langue française --&gt;</span>
 </pre></div>
 </div>
 <div class="admonition attention">
@@ -636,10 +641,10 @@ féminin est le second qui associe un mot à un booléen qui indique s’il est 
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">times</span></code><a class="headerlink" href="#le-module-times" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Permet de générer une liste de nombre pour itérer dessus, utile dans les boucles.</p>
 <p>Exemple :</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% load times %}
-{% for i in 25|times %}
-    je suis dans l&#39;itération {{ i }}
-{% endfor %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">times</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">i</span> <span class="k">in</span> <span class="m">25</span><span class="o">|</span><span class="nf">times</span> <span class="cp">%}</span>
+    je suis dans l&#39;itération <span class="cp">{{</span> <span class="nv">i</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -648,13 +653,13 @@ féminin est le second qui associe un mot à un booléen qui indique s’il est 
 <p>Ce module définit un <em>templatetag</em> utilisé dans le module de tutoriel (v2) dans le but de générer la hiérarchie des tutos et l’arbre
 des déplacements possibles d’un élément. Il s’agit d’un wrapper autour de <code class="docutils literal notranslate"><span class="pre">zds.tutorialv2.utils.get_target_tagged_tree</span></code>.</p>
 <p>Exemple :</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>{% load target_tree %}
-{% for element in child|target_tree %}
-        &lt;option value=&quot;before:{{element.0}}&quot;
-        {% if not element.3 %} disabled {% endif %}&gt;
-             &amp;mdash;&amp;mdash;{% for _ in element.2|times %}&amp;mdash;{% endfor %}{{ element.1 }}
-        &lt;/option&gt;
-{% endfor %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">target_tree</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">element</span> <span class="k">in</span> <span class="nv">child</span><span class="o">|</span><span class="nf">target_tree</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;before:</span><span class="cp">{{</span><span class="nv">element.0</span><span class="cp">}}</span><span class="s">&quot;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nv">element.3</span> <span class="cp">%}</span> <span class="na">disabled</span> <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="p">&gt;</span>
+             <span class="ni">&amp;mdash;&amp;mdash;</span><span class="cp">{%</span> <span class="k">for</span> <span class="kp">_</span> <span class="k">in</span> <span class="nv">element.2</span><span class="o">|</span><span class="nf">times</span> <span class="cp">%}</span><span class="ni">&amp;mdash;</span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}{{</span> <span class="nv">element.1</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -662,13 +667,13 @@ des déplacements possibles d’un élément. Il s’agit d’un wrapper autour 
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">url_category</span></code><a class="headerlink" href="#le-module-url-category" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Ce module définit un <em>templatetag</em> permetant d’accéder à l’url des listes de tutoriels et articles filtrés par tag. Il est employé pour l’affichage des <em>tags</em> des tutoriels et articles.</p>
 <p>Exemple :</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>{% if content.subcategory.all|length &gt; 0 %}
-    &lt;ul class=&quot;taglist&quot; itemprop=&quot;keywords&quot;&gt;
-        {% for catofsubcat in content.subcategory.all %}
-            &lt;li&gt;&lt;a href=&quot;{{ catofsubcat|category_url:content }}&quot;&gt;{{ catofsubcat.title }}&lt;/a&gt;&lt;/li&gt;
-        {% endfor %}
-    &lt;/ul&gt;
-{% endif %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">content.subcategory.all</span><span class="o">|</span><span class="nf">length</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;taglist&quot;</span> <span class="na">itemprop</span><span class="o">=</span><span class="s">&quot;keywords&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">for</span> <span class="nv">catofsubcat</span> <span class="k">in</span> <span class="nv">content.subcategory.all</span> <span class="cp">%}</span>
+            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">catofsubcat</span><span class="o">|</span><span class="nf">category_url</span><span class="o">:</span><span class="nv">content</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">catofsubcat.title</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -677,13 +682,13 @@ des déplacements possibles d’un élément. Il s’agit d’un wrapper autour 
 <p>Ce module permet d’avoir un « versionnage graphique » des auteurs. En effet lorsqu’un tutoriel est publié il se peut que les auteurs ayant participé à sa publication ne soient plus les mêmes dans le futur.
 Par exemple, l’auteur principal du tuto peut avoir demandé de l’aide pour écrire la suite du tuto. Il serait injuste de mettre cette seconde personne en tant qu’auteur de la version publiée puisqu’elle n’a pas participé à sa rédaction.</p>
 <p>Exemple :</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>{% load displayable_authors %}
-{% for authors in content|displayable_authors:True %}
-   &lt;!-- here display all author for public version --&gt;
-{% endfor %}
-{% for authors in content|displayable_authors:False %}
-   &lt;!-- here display all author for draft version --&gt;
-{% endfor %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">displayable_authors</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">authors</span> <span class="k">in</span> <span class="nv">content</span><span class="o">|</span><span class="nf">displayable_authors</span><span class="o">:</span><span class="kp">True</span> <span class="cp">%}</span>
+   <span class="c">&lt;!-- here display all author for public version --&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">authors</span> <span class="k">in</span> <span class="nv">content</span><span class="o">|</span><span class="nf">displayable_authors</span><span class="o">:</span><span class="kp">False</span> <span class="cp">%}</span>
+   <span class="c">&lt;!-- here display all author for draft version --&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -692,9 +697,9 @@ Par exemple, l’auteur principal du tuto peut avoir demandé de l’aide pour �
 <p><code class="docutils literal notranslate"><span class="pre">highlight</span></code></p>
 <p>Permet de mettre en surbrillance les résultats d’une recherche.</p>
 <p>Exemple :</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>{% if search_result.text %}
-    {% highlight search_result &quot;text&quot; %}
-{% endif %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">search_result.text</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">highlight</span> <span class="nv">search_result</span> <span class="s2">&quot;text&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 </div>
@@ -702,8 +707,8 @@ Par exemple, l’auteur principal du tuto peut avoir demandé de l’aide pour �
 <h2>Le module <code class="docutils literal notranslate"><span class="pre">joinby</span></code><a class="headerlink" href="#le-module-joinby" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Ce module permet de lister le contenu d’un itérable en une seule ligne. C’est un équivalent un peu plus flexible de la fonction <code class="docutils literal notranslate"><span class="pre">str.join</span></code> en Python. Le séparateur peut être modifié et une option permet d’utiliser le même séparateur pour le dernier élément. Par défaut, le mot « et » est utilisé pour précéder le dernier élément.</p>
 <p>Exemple :</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>{% joinby fruits %}
-{% joinby fruits &#39;;&#39; final_separator=&#39;;&#39; %}
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">joinby</span> <span class="nv">fruits</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">joinby</span> <span class="nv">fruits</span> <span class="s1">&#39;;&#39;</span> <span class="nv">final_separator</span><span class="o">=</span><span class="s1">&#39;;&#39;</span> <span class="cp">%}</span>
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Clémentine, Orange et Citron
@@ -733,11 +738,19 @@ Clémentine;Orange;Citron
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2014-2020, Zeste de Savoir
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -748,7 +761,6 @@ Clémentine;Orange;Citron
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
